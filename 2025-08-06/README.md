@@ -1,12 +1,12 @@
-# Font Awesome v7 in Next.js Verification
+# Next.jsにおけるFont Awesome v7の検証
 
-This document summarizes the verification of using Font Awesome v7 in a Next.js application.
+このドキュメントは、Next.jsアプリケーションでFont Awesome v7を使用する際の検証結果をまとめたものです。
 
-**Note:** This verification was performed without access to the official Font Awesome v7 documentation. The information regarding deprecated props is based on assumptions and common patterns in library evolution.
+**注意:** この検証は、Font Awesome v7の公式ドキュメントにアクセスせずに行われました。非推奨となったプロパティに関する情報は、ライブラリの進化における一般的なパターンと仮定に基づいています。
 
-## Required Props
+## 必須プロパティ
 
-The only required prop for the `FontAwesomeIcon` component remains `icon`.
+`FontAwesomeIcon`コンポーネントで唯一必須のプロパティは、引き続き`icon`です。
 
 ```jsx
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,22 +15,22 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 <FontAwesomeIcon icon={faUser} />
 ```
 
-## Other Commonly Used Props
+## その他よく使われるプロパティ
 
-The following props continue to work as expected for styling:
+以下のプロパティは、スタイリングのために引き続き期待どおりに機能します。
 
-- `size`: Modifies the icon size (e.g., `"2x"`, `"lg"`).
-- `color`: Sets the icon color.
+- `size`: アイコンのサイズを変更します（例: `"2x"`、`"lg"`）。
+- `color`: アイコンの色を設定します。
 
-## Potentially Deprecated Props (Assumed)
+## 非推奨の可能性があるプロパティ（仮定）
 
-Based on common trends to move styling concerns from props to CSS, the following props are assumed to be deprecated in v7.
+スタイリングに関する懸念をプロパティからCSSに移行するという一般的な傾向に基づき、以下のプロパティはv7で非推奨になると想定されます。
 
-### `spin` and `pulse`
+### `spin` と `pulse`
 
-The `spin` and `pulse` boolean props may be removed. Animations should be handled via CSS classes. You can define your own keyframe animations or use utility classes if your CSS framework provides them.
+`spin`と`pulse`のブール値プロパティは削除される可能性があります。アニメーションはCSSクラスを介して処理する必要があります。独自のキーフレームアニメーションを定義するか、CSSフレームワークが提供する場合はユーティリティクラスを使用できます。
 
-**Example (using CSS-in-JS):**
+**例（CSS-in-JSを使用）:**
 
 ```jsx
 <style jsx>{`
@@ -51,17 +51,17 @@ The `spin` and `pulse` boolean props may be removed. Animations should be handle
 
 ### `border`
 
-The `border` prop is likely removed. You can add a border using CSS.
+`border`プロパティは削除される可能性が高いです。CSSを使用してボーダーを追加できます。
 
 ```jsx
 <FontAwesomeIcon icon={faUser} style={{ border: '1px solid black', padding: '5px' }} />
 ```
 
-## Next.js Integration
+## Next.jsとの統合
 
-To use Font Awesome in Next.js (App Router), you need to prevent Next.js from trying to render the icons on the server without CSS.
+Next.js（App Router）でFont Awesomeを使用するには、Next.jsがCSSなしでサーバー上でアイコンをレンダリングしようとするのを防ぐ必要があります。
 
-Add the following configuration to your layout or page component:
+レイアウトまたはページコンポーネントに次の設定を追加します。
 
 ```javascript
 import { config } from '@fortawesome/fontawesome-svg-core';
@@ -69,11 +69,11 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 ```
 
-This ensures that the styles are loaded correctly.
+これにより、スタイルが正しく読み込まれるようになります。
 
-## Summary of v6 to v7 Migration (Assumed)
+## v6からv7への移行の概要（仮定）
 
-- **Required:** The `icon` prop is still required.
-- **Styling:** Props like `size` and `color` are still available.
-- **Deprecated:** `spin`, `pulse`, and `border` props are likely removed. Use CSS for these effects.
-- **Next.js:** Remember to include the `config.autoAddCss = false;` line to ensure proper styling.
+- **必須:** `icon`プロパティは引き続き必須です。
+- **スタイリング:** `size`や`color`のようなプロパティは引き続き利用可能です。
+- **非推奨:** `spin`、`pulse`、`border`プロパティは削除される可能性が高いです。これらの効果にはCSSを使用してください。
+- **Next.js:** スタイリングを正しく適用するために、`config.autoAddCss = false;`の行を含めることを忘れないでください。
