@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 const MissingDependency = () => {
   const [count, setCount] = useState(0);
-  const [text, setText] = useState('');
 
   useEffect(() => {
     // このuseEffectはcountに依存しているが、依存配列に含まれていない

@@ -1,3 +1,4 @@
+"use client";
 import MissingDependency from "./components/MissingDependency";
 import NoCleanup from "./components/NoCleanup";
 import IncorrectDependency from "./components/IncorrectDependency";
